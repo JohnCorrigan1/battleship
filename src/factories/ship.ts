@@ -10,15 +10,19 @@ export class Ship {
   }
 
   hit(position: number) {
-    //marks the hit position with 1 aka "hit"
-    this.isHit[position] = 1;
+    //push position to ishit array
+    if(!this.isHit.includes(position) && this.isHit.length < this.length){
+    this.isHit.push(position);
+    return this.isHit;
+    }
   }
 
   isSunk() {
     //checks each position of ship for hits if all are hit is sunk
-    this.isHit.forEach((element) => {
-      if (element !== 1) return false;
-    });
-    return true;
+    if(this.isHit.length === this.length){
+      this.sunk = true;
+      return true;
+    }
+    return false;
   }
 }

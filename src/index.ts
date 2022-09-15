@@ -1,5 +1,6 @@
 import './styles.css'
 import { GameBoard } from './factories/gameboard'
+import { Ship } from './factories/ship'
 
 const body = document.querySelector('body')
 
@@ -8,6 +9,3 @@ test.textContent = ('hello')
 test.classList.add('test')
 
 body?.appendChild(test)
-
-let newGame = new GameBoard()
-console.log(newGame.board)

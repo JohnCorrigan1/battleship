@@ -1,5 +1,7 @@
 // import { Ship } from './ship'
 
+import { Ship } from "./ship";
+
 export class GameBoard {
   //10 * 10 gameboard
   //each item(grid div spot on board) labeled 1-100
@@ -7,6 +9,7 @@ export class GameBoard {
   //need to place ships
   //check if placement is in gameboard with ship length/board length/height
   //place ships randomly for ai
+
 
   board: number[][];
   hits: number[];
@@ -30,10 +33,74 @@ export class GameBoard {
     }
   }
 
+  placeShip(ship: Ship, start: number, vertical: boolean){
+    if(vertical){
+      for(let i = 0; i < ship.length; i++){
+        for(let j = 0; j < this.board.length; j++){
+          if(this.board[j].includes(start)){
+            let index = this.board[j].indexOf(start)
+            this.board[j][index] = 0;
+          }
+        }
+        start += 10;
+      }
+    }
+    else{
+      for(let i = 0; i < ship.length; i++){
+        for(let j = 0; j < this.board.length; j++){
+          if(this.board[j].includes(start)){
+            let index = this.board[j].indexOf(start)
+            this.board[j][index] = 0;
+          }
+        }
+        start += 1;
+      }
+    }
+  }
+
   recieveAttack(position: number){
     //determine if a ship is on that position
     //if it is call ship hit function and push to hits
     //else push to misses
-    this.hits.push(position)
-  }
+    //also need to push hit to the ship hit array
+    let column: number;
+    let str = position.toString()
+    if(str.length < 2){
+      column= position -1
+    }
+    else{
+      str.slice(1, 1)
+      column = parseInt(str) - 1
+    }
+
+    let row = parseInt(str.slice(0,1)) -1
+
+    console.log(column, row)
+
+    if(this.board[row][column] === 0){
+      this.hits.push(position)
+    }
+    else{
+      this.misses.push(position)
+    }
+
+      // for(let j = 0; j < this.board.length; j++){
+      //   if(this.board[j].includes(position)){
+      //     let index = this.board[j].indexOf(position)
+      //     console.log(index)
+      //     console.log(j)
+      //     //if this position has ship its a hit!
+      //     if(this.board[j][index] === 0){
+      //       this.attackHits.push(position)
+      //       console.log(position)
+      //     }
+      //     else{ //if no ship its a miss!
+      //       this.misses.push(position)
+      //     }
+      //     return
+      //   }
+      // }
+      
+    }
+
 }
