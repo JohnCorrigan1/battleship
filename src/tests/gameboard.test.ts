@@ -3,12 +3,13 @@ import { Ship } from "../factories/ship"
 
 describe('Gameboard', () => {
     let game: GameBoard
-    
+    let destroyer: Ship;
+    let carrier: Ship;
     beforeEach(() => {
         game = new GameBoard()        
-        let carrier = new Ship(5, "carrier");
+        carrier = new Ship(5, "carrier");
         game.placeShip(carrier, 10, true)
-        let destroyer = new Ship(4, "destroyer")
+        destroyer = new Ship(4, "destroyer")
         game.placeShip(destroyer, 91, false)
         game.recieveAttack(10)
         game.recieveAttack(9)

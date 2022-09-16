@@ -13,12 +13,14 @@ export class GameBoard {
   board: any[][];
   hits: number[];
   misses: number[];
+  placedShips: Ship[];
 
   constructor() {
     this.board = [];
     this.createBoard();
     this.hits = [];
     this.misses = [];
+    this.placedShips = []
   }
 
   createBoard() {
@@ -39,6 +41,7 @@ export class GameBoard {
           if (this.board[j].includes(start)) {
             let index = this.board[j].indexOf(start);
             this.board[j][index] = ship.name;
+            
           }
         }
         start += 10;
@@ -54,6 +57,7 @@ export class GameBoard {
         start += 1;
       }
     }
+    this.placedShips.push(ship)
   }
 
   recieveAttack(position: number) {
@@ -63,19 +67,27 @@ export class GameBoard {
     //also need to push hit to the ship hit array
     let column: number;
     let str = position.toString();
-    if (str.length < 2) {
+    let row: number;
+    if (position < 11) {
       column = position - 1;
+      row = 0;
     } else {
-      str.slice(1, 1);
-      column = parseInt(str) - 1;
+      // str.slice(1, 1);
+      row = parseInt(str.slice(0, 1)) - 1;
+      column = parseInt(str.slice(1, 2)) - 1;
     }
-
-    let row = parseInt(str.slice(0, 1)) - 1;
-
-    console.log(column, row);
 
     if (!Number.isInteger(this.board[row][column])) {
       this.hits.push(position);
+      this.placedShips.forEach(ship =>{
+        if(ship.name === this.board[row][column]){
+          ship.hit(position)
+          return
+        }
+      })
+      // console.log(this.board[row][column])
+      // let ship = this.board[row][column].name
+      // console.log(ship)
     } else {
       this.misses.push(position);
     }
