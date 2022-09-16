@@ -4,11 +4,11 @@ describe("Ship", () => {
   let ship: Ship;
 
   beforeEach(() => {
-    ship = new Ship(2);
+    ship = new Ship(2, "patrol");
   });
 
   test("ship is right length", () => {
-    expect(ship).toEqual({ length: 2, isHit: [], sunk: false });
+    expect(ship).toEqual({ length: 2, isHit: [], sunk: false, name: "patrol" });
   });
 
   test("hitting ship", () => {

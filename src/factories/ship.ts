@@ -2,11 +2,13 @@ export class Ship {
   length: number;
   isHit: number[];
   sunk: boolean;
+  name: string
 
-  constructor(length: number) {
+  constructor(length: number, name: string) {
     this.length = length;
     this.isHit = [];
     this.sunk = false;
+    this.name = name
   }
 
   hit(position: number) {
