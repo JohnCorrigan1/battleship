@@ -45,3 +45,22 @@ h1{
     width: 2em;
     height: 2em;
 }
+
+.info {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    margin-top: 15vh;
+}
+
+.info-container{
+    display: flex;
+}
+
+.miss{
+    background-color: antiquewhite;
+}
+
+.ai-grid:hover{
+    cursor:pointer;
+}
