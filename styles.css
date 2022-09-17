@@ -62,5 +62,13 @@ h1{
 }
 
 .ai-grid:hover{
-    cursor:pointer;
+    cursor:crosshair;
+}
+
+.ship-here{
+    background-color: aquamarine;
+}
+
+.hit{
+    background-color: red;
 }
