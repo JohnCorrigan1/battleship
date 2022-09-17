@@ -33,6 +33,10 @@ for(let i = 0; i < board.length; i++){
         gridItem.setAttribute("position", board[i][j])
         // gridItem.textContent = board[i][j]
         gridItem.classList.add('grid-item')
+        gridItem.classList.add('ai-grid')
+        gridItem.addEventListener('click', function(){
+            gridItem.classList.add('miss')
+        })
         grid2?.appendChild(gridItem)
     }
 }
