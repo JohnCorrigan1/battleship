@@ -107,15 +107,32 @@ export class GameBoard {
     }
     
     //starting row plus length of ship must be 10 or less to be valid
-
-
-      if(isVertical && row + length < 10){
+      if(isVertical && row + length - 1  < 10){
         return true;
       }
-      else if(!isVertical && column + length <= 10){
+      else if(!isVertical && column + length - 1 < 10){
         return true;
       }
       return false;
 
   }
+
+  randomlyPlaceShips(ship: Ship){
+    let valid: boolean = false;
+    while(!valid){
+    let position: number = Math.floor(Math.random() * 100) + 1;
+    let direction: boolean;
+    if(Math.random() < .5){
+      direction = true
+    }
+    else{
+      direction = false
+    }
+    if(this.validPlacement(position, ship.length, direction)){
+      this.placeShip(ship, position, direction)
+      valid = true;
+      return
+    }
+  }
+}
 }
