@@ -18,9 +18,23 @@ export class Player {
             this.shots.push(position)
             oponent.gameboard.recieveAttack(position)
             if(oponent.gameboard.isOver()){
-                console.log("gg")
+                // console.log("gg")
             }
             
+        }
+    }
+
+    randomAttack(opponent: Player){
+        let validShot: boolean = false
+        let position: number;
+        while(!validShot){
+            position = Math.floor(Math.random() * 100) + 1;
+            if(!this.shots.includes(position)){
+                console.log(position)
+                this.shots.push(position)
+                opponent.gameboard.recieveAttack(position)
+                validShot = true
+            }
         }
     }
 
