@@ -40,10 +40,9 @@ export class Player {
                 this.shots.push(position)
                 opponent.gameboard.recieveAttack(row, col)
                 validShot = true
-                let str: string
-                str = row.toString() + col.toString()
-                return str
-            }
+                // let str: string
+                // str = row.toString() + col.toString()
+                return position
         }
     }
 

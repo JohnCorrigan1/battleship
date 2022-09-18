@@ -91,11 +91,12 @@ for(let i = 0; i < cBoard.length; i++){
             else{
                 gridItem.classList.add('miss')
             }
-            let newPosition: any
-            newPosition = computer.randomAttack(human)
-            let row = human.gameboard.getRow(newPosition)
-            let col = human.gameboard.getCol(newPosition)
-            const item = document.querySelector(`[hposition="${newPosition}"]`)
+            let position: any
+            position = computer.randomAttack(human)
+            let newPosition: string = human.gameboard.convertPosition(position)
+            let row: number = human.gameboard.getRow(newPosition)
+            let col: number = human.gameboard.getCol(newPosition)
+            const item = document.querySelector(`[hposition="${position}"]`)
             if(!Number.isInteger(hBoard[row][col])){
                 item?.classList.add('hit')
             }
