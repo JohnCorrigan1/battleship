@@ -154,7 +154,12 @@ export class GameBoard {
     } else if (position === 100) {
       row = 9;
       column = 9;
-    } else {
+    } 
+    else if(position % 10 === 0){
+      row = parseInt(str.slice(0,1))
+      column = 9
+    }
+    else {
       row = parseInt(str.slice(0, 1));
       column = parseInt(str.slice(1, 2)) - 1;
     }

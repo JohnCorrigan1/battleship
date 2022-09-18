@@ -46,11 +46,12 @@ humanShips.forEach(ship => {
     
 })
 
-
+let count: any = 0;
 for(let i = 0; i < hBoard.length; i++){
     for(let j = 0; j < hBoard[i].length; j++){
+        count++
         const gridItem = document.createElement('div')
-        gridItem.setAttribute("hposition", hBoard[i][j])
+        gridItem.setAttribute("hposition", count)
         // gridItem.textContent = board[i][j]
         if(!Number.isInteger(hBoard[i][j])){
             gridItem.classList.add('ship-here')
@@ -69,6 +70,9 @@ for(let i = 0; i < cBoard.length; i++){
         gridItem.classList.add('grid-item')
         gridItem.classList.add('ai-grid')
         gridItem.addEventListener('click', function(){
+            if(gridItem.classList.contains('hit') || gridItem.classList.contains('miss')){
+                return
+            }
             if(!Number.isInteger(cBoard[i][j])){
                 gridItem.classList.add('hit')
                 let isSunk: boolean = false;
@@ -93,12 +97,29 @@ for(let i = 0; i < cBoard.length; i++){
             }
             let position: any
             position = computer.randomAttack(human)
-            let newPosition: string = human.gameboard.convertPosition(position)
+            const item = document.querySelector(`[hposition="${position}"]`)
+            let temp: number = position
+            let newPosition: string = human.gameboard.convertPosition(temp)
             let row: number = human.gameboard.getRow(newPosition)
             let col: number = human.gameboard.getCol(newPosition)
-            const item = document.querySelector(`[hposition="${position}"]`)
-            if(!Number.isInteger(hBoard[row][col])){
+            if(!Number.isInteger(human.gameboard.board[row][col])){
                 item?.classList.add('hit')
+                let isSunk1: boolean = false;
+                human.gameboard.recieveAttack(i, j);
+                human.gameboard.placedShips.forEach((ship => {
+                    if(ship.name === hBoard[i][j]){
+                    isSunk1 = ship.sunk
+                    }
+                }))
+                if(isSunk1){
+                    const sunken = document.createElement('h2')
+                    sunken.textContent = hBoard[i][j]
+                    sunken1?.appendChild(sunken)
+
+                    if(human.gameboard.isOver()){
+                        alert("You Lose")
+                    }
+                }
             }
             else{
                 item?.classList.add('miss')

@@ -43,8 +43,7 @@ export class Player {
                 // let str: string
                 // str = row.toString() + col.toString()
                 return position
+            }
         }
     }
-
-
 }
