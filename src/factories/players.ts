@@ -14,9 +14,12 @@ export class Player {
     }
 
     attack(position: number, oponent: Player){
+        let newPosition = this.gameboard.convertPosition(position)
+        let row = this.gameboard.getRow(newPosition)
+        let col =this.gameboard.getCol(newPosition)
         if(!this.shots.includes(position)){
             this.shots.push(position)
-            oponent.gameboard.recieveAttack(position)
+            oponent.gameboard.recieveAttack(row, col)
             if(oponent.gameboard.isOver()){
                 // console.log("gg")
             }
@@ -29,11 +32,17 @@ export class Player {
         let position: number;
         while(!validShot){
             position = Math.floor(Math.random() * 100) + 1;
+            let newPosition = this.gameboard.convertPosition(position)
+            let row = this.gameboard.getRow(newPosition)
+            let col =this.gameboard.getCol(newPosition)
             if(!this.shots.includes(position)){
                 console.log(position)
                 this.shots.push(position)
-                opponent.gameboard.recieveAttack(position)
+                opponent.gameboard.recieveAttack(row, col)
                 validShot = true
+                let str: string
+                str = row.toString() + col.toString()
+                return str
             }
         }
     }

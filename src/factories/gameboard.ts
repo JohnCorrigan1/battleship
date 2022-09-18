@@ -11,6 +11,7 @@ export class GameBoard {
   misses: number[];
   placedShips: Ship[];
   gameOver: boolean;
+  sunkShips: Ship[];
 
   constructor() {
     this.board = [];
@@ -19,6 +20,7 @@ export class GameBoard {
     this.misses = [];
     this.placedShips = [];
     this.gameOver = false;
+    this.sunkShips = [];
   }
 
   createBoard() {
@@ -43,8 +45,11 @@ export class GameBoard {
         }
         start += 10;
       }
-      this.placedShips.push(ship)
-    } else if(!vertical && this.validPlacement(start, ship.length, false) === true) {
+      this.placedShips.push(ship);
+    } else if (
+      !vertical &&
+      this.validPlacement(start, ship.length, false) === true
+    ) {
       for (let i = 0; i < ship.length; i++) {
         for (let j = 0; j < this.board.length; j++) {
           if (this.board[j].includes(start)) {
@@ -54,123 +59,119 @@ export class GameBoard {
         }
         start += 1;
       }
-      this.placedShips.push(ship)
+      this.placedShips.push(ship);
     }
   }
 
-  recieveAttack(position: number) {
+  recieveAttack(row: number, column: number) {
+    let position = row + column;
+
+    if (!Number.isInteger(this.board[row][column])) {
+      this.hits.push(position);
+      this.placedShips.forEach((ship) => {
+        if (ship.name === this.board[row][column]) {
+          ship.hit(position);
+          ship.isSunk();
+          if(ship.isSunk()){
+            this.sunkShips.push(ship)
+          }
+          return
+        }
+      });
+    } else {
+      this.misses.push(position);
+      return
+    }
+  }
+
+  isOver() {
+   if(this.sunkShips.length === 4){
+    return true
+   }
+   return false
+  }
+
+  validPlacement(position: number, length: number, isVertical: boolean) {
+    let newPosition = this.convertPosition(position)
+    let row = this.getRow(newPosition)
+    let column = this.getCol(newPosition)
+
+    if (isVertical && row + length > 10) {
+      return false;
+    } else if (!isVertical && column + length > 10) {
+      return false;
+    }
+
+    if (isVertical) {
+      for (let i = 0; i < length; i++) {
+        if (!Number.isInteger(this.board[row][column])) {
+          return false;
+        } else {
+          row++;
+        }
+      }
+    } else {
+      for (let i = 0; i < length; i++) {
+        if (!Number.isInteger(this.board[row][column])) {
+          return false;
+        } else {
+          column++;
+        }
+      }
+    }
+    return true;
+  }
+
+  randomlyPlaceShips(ship: Ship) {
+    let valid: boolean = false;
+    let position: number;
+    let direction: boolean;
+    while (!valid) {
+      position = Math.floor(Math.random() * 100) + 1;
+      if (Math.random() < 0.5) {
+        direction = true;
+      } else {
+        direction = false;
+      }
+
+      if (this.validPlacement(position, ship.length, direction)) {
+        valid = true;
+        this.placeShip(ship, position, direction);
+        // return
+      } else {
+        valid = false;
+      }
+    }
+  }
+
+  convertPosition(position: number) {
     let column: number;
     let str = position.toString();
     let row: number;
     if (position < 11) {
       column = position - 1;
       row = 0;
-    } 
-    else if(position === 100){
-      row = 9
-      column = 9
-    }
-    else {
-   
+    } else if (position === 100) {
+      row = 9;
+      column = 9;
+    } else {
       row = parseInt(str.slice(0, 1));
       column = parseInt(str.slice(1, 2)) - 1;
     }
 
-    if (!Number.isInteger(this.board[row][column])) {
-      this.hits.push(position);
-      this.placedShips.forEach(ship =>{
-        if(ship.name === this.board[row][column]){
-          ship.hit(position)
-          ship.isSunk()
-          return
-        }
-      })
-    } else {
-      this.misses.push(position);
-    }
+    let strRow: string = row.toString();
+    let strCol: string = column.toString();
+
+    let newPosition = strRow + strCol;
+
+    return newPosition;
   }
 
-  isOver(){
-    for(let i = 0; i < this.placedShips.length; i++){
-      if(this.placedShips[i].sunk = false) return false;
-    }
-    return true;
+  getCol(str: string) {
+    return parseInt(str.slice(1, 2));
   }
 
-  validPlacement(position: number, length: number, isVertical: boolean){
-    //get column and row from position
-
-    let str = position.toString();
-    let column: number;
-    let row: number;
-    if (position < 11) {
-      column = position - 1;
-      row = 0;
-    }
-    else if(position === 100){
-      return false
-    } 
-    else {
-   
-      row = parseInt(str.slice(0, 1));
-      if(position % 10 === 0){
-        column = 9
-      }
-      else column = parseInt(str.slice(1, 2)) - 1;
-    }
-
-    if(isVertical && row + length  > 10){
-      return false;
-    }
-    else if(!isVertical && column + length > 10){
-      return false;
-    }
-
-    if(isVertical){
-    for(let i = 0; i < length; i++){
-      if(!Number.isInteger(this.board[row][column])){
-        return false
-      }
-      else{
-        row++;
-      }
-    }
+  getRow(str: string) {
+    return parseInt(str.slice(0, 1));
   }
-  else{
-    for(let i = 0; i < length; i++){
-      if(!Number.isInteger(this.board[row][column])){
-        return false
-      }
-      else{
-        column++
-      }
-    }
-  }
-    return true;
-  }
-  
-  
-  randomlyPlaceShips(ship: Ship){
-    let valid: boolean = false;
-    let position: number;
-    let direction: boolean;
-    while(!valid){
-    position = Math.floor(Math.random() * 100) + 1;
-    if(Math.random() < .5){
-      direction = true
-    }
-    else{
-      direction = false
-    }
-
-    if(this.validPlacement(position, ship.length, direction)){
-      valid = true;
-      this.placeShip(ship, position, direction)
-      // return
-    }
-    else{
-      valid = false;
-    }
-  }
-}
 }
