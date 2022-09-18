@@ -7,6 +7,8 @@ body{
     height: 100%;
     display: flex;
     flex-direction: column;
+    font-family: 'Play', sans-serif;
+    background-color: #0F4C75;
 }
 
 .header{
@@ -15,7 +17,11 @@ body{
     align-items: center;
     width: 100vw;
     height: 100px;
-    background-color: antiquewhite;
+    background-color: #1B262C;
+    color: #cccccc;
+    text-shadow: 2px 2px #BBE1FA;
+    font-size: 32px;
+    box-shadow: 5px 5px 5px -2px #BBE1FA;
 }
 
 .main {
@@ -36,18 +42,28 @@ h1{
     display: grid;
     grid-template-rows: repeat(10, 1fr);
     grid-template-columns: repeat(10, 1fr);
+    background-color: #BBE1FA;
+    -webkit-box-shadow: 0 0 20px #000;
+    box-shadow: 0 0 20px #000;
 }
 
 .grid-container2{
     display: grid;
     grid-template-rows: repeat(10, 1fr);
     grid-template-columns: repeat(10, 1fr);
+    background-color: #BBE1FA;
+    -webkit-box-shadow: 0 0 20px #000;
+    box-shadow: 0 0 20px #000;
 }
 
 .grid-item {
-    border: 1px solid black;
+    border: 2px solid black;
     width: 2em;
     height: 2em;
+}
+
+.grid-item:hover{
+    background-color: #cccccc;
 }
 
 .info {
@@ -58,11 +74,12 @@ h1{
 }
 
 .info-container{
-    display: flex;
+    /* display: flex;
+    flex-direction: column; */
 }
 
 .miss{
-    background-color: antiquewhite;
+    background-color: lightgray;
 }
 
 .ai-grid:hover{
@@ -70,7 +87,7 @@ h1{
 }
 
 .ship-here{
-    background-color: aquamarine;
+    background-color: #1B262C;
 }
 
 .hit{
@@ -90,5 +107,7 @@ h1{
 @media (max-width: 799px){
     .main{
         display: grid;
+        margin-right: 0;
+        margin-left: 0;
     }
 }

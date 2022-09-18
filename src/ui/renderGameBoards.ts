@@ -29,9 +29,7 @@ export default function renderGrids(playerName: string) {
   const restart = document.createElement("button");
   restart.textContent = "Restart";
   restart.addEventListener("click", function () {
-    // gridContainer1?.removeChild(grid1);
-    // gridContainer2?.removeChild(grid2);
-    // renderGrids(playerName);
+    main.innerHTML = ''
     startGame()
 });
 
