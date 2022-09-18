@@ -1,7 +1,7 @@
 import renderGrids from "./renderGameBoards";
 
 export default function startGame(){
-
+    
 const info = document.querySelector('.info')
 
 const inputContainer = document.createElement('div')
