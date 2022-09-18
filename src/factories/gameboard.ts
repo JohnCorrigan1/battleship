@@ -116,41 +116,40 @@ export class GameBoard {
       if(position % 10 === 0){
         column = 9
       }
-      else column = parseInt(str.slice(1, 2));
+      else column = parseInt(str.slice(1, 2)) - 1;
     }
 
-    let tempRow = row
-    let tempColumn = column
-    console.log(row, column)
-    console.log(typeof this.board[tempRow][column] === 'string')
-
-    //this is the root of the bug but i need to implement some version of this
-    // for(let i = 0; i < length; i++){
-    //   if(isVertical){
-    //     if(!Number.isInteger(this.board[tempRow][column])){
-    //       return false
-    //     }
-    //     tempRow++
-    //   }
-    //   else if(!isVertical){
-    //     if(typeof this.board[row][tempColumn] === 'string'){
-    //       return false
-    //     }
-    //     tempColumn++
-    //   }
-    // }
-    
-    //starting row plus length of ship must be 10 or less to be valid
-      if(isVertical && row + length - 1  < 10){
-        return true;
-      }
-      else if(!isVertical && column + length - 1 < 10){
-        return true;
-      }
+    if(isVertical && row + length  > 10){
+      return false;
+    }
+    else if(!isVertical && column + length > 10){
       return false;
     }
 
-
+    if(isVertical){
+    for(let i = 0; i < length; i++){
+      if(!Number.isInteger(this.board[row][column])){
+        return false
+      }
+      else{
+        row++;
+      }
+    }
+  }
+  else{
+    for(let i = 0; i < length; i++){
+      if(!Number.isInteger(this.board[row][column])){
+        return false
+      }
+      else{
+        column++
+      }
+    }
+  }
+    return true;
+  }
+  
+  
   randomlyPlaceShips(ship: Ship){
     let valid: boolean = false;
     let position: number;
@@ -165,9 +164,9 @@ export class GameBoard {
     }
 
     if(this.validPlacement(position, ship.length, direction)){
-      this.placeShip(ship, position, direction)
       valid = true;
-      return
+      this.placeShip(ship, position, direction)
+      // return
     }
     else{
       valid = false;
