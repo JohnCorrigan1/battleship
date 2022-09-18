@@ -3,8 +3,8 @@ import renderGrids from "./ui/renderGameBoards";
 import startGame from "./ui/startGame";
 
 
-startGame()
+// startGame()
 
 
 
-// renderGrids('jjcrazyman')
+renderGrids('jjcrazyman')

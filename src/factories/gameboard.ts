@@ -33,7 +33,7 @@ export class GameBoard {
   }
 
   placeShip(ship: Ship, start: number, vertical: boolean) {
-    if (vertical && this.validPlacement(start, ship.length, true)) {
+    if (vertical && this.validPlacement(start, ship.length, true) === true) {
       for (let i = 0; i < ship.length; i++) {
         for (let j = 0; j < this.board.length; j++) {
           if (this.board[j].includes(start)) {
@@ -44,7 +44,7 @@ export class GameBoard {
         start += 10;
       }
       this.placedShips.push(ship)
-    } else if(!vertical && this.validPlacement(start, ship.length, false)) {
+    } else if(!vertical && this.validPlacement(start, ship.length, false) === true) {
       for (let i = 0; i < ship.length; i++) {
         for (let j = 0; j < this.board.length; j++) {
           if (this.board[j].includes(start)) {
@@ -65,7 +65,12 @@ export class GameBoard {
     if (position < 11) {
       column = position - 1;
       row = 0;
-    } else {
+    } 
+    else if(position === 100){
+      row = 9
+      column = 9
+    }
+    else {
    
       row = parseInt(str.slice(0, 1));
       column = parseInt(str.slice(1, 2)) - 1;
@@ -94,44 +99,77 @@ export class GameBoard {
 
   validPlacement(position: number, length: number, isVertical: boolean){
     //get column and row from position
+
     let str = position.toString();
     let column: number;
     let row: number;
     if (position < 11) {
       column = position - 1;
       row = 0;
-    } else {
+    }
+    else if(position === 100){
+      return false
+    } 
+    else {
    
       row = parseInt(str.slice(0, 1));
-      column = parseInt(str.slice(1, 2)) - 1;
+      if(position % 10 === 0){
+        column = 9
+      }
+      else column = parseInt(str.slice(1, 2)) - 1;
     }
-    
-    //starting row plus length of ship must be 10 or less to be valid
-      if(isVertical && row + length - 1  < 10){
-        return true;
-      }
-      else if(!isVertical && column + length - 1 < 10){
-        return true;
-      }
+
+    if(isVertical && row + length  > 10){
       return false;
+    }
+    else if(!isVertical && column + length > 10){
+      return false;
+    }
 
+    if(isVertical){
+    for(let i = 0; i < length; i++){
+      if(!Number.isInteger(this.board[row][column])){
+        return false
+      }
+      else{
+        row++;
+      }
+    }
   }
-
+  else{
+    for(let i = 0; i < length; i++){
+      if(!Number.isInteger(this.board[row][column])){
+        return false
+      }
+      else{
+        column++
+      }
+    }
+  }
+    return true;
+  }
+  
+  
   randomlyPlaceShips(ship: Ship){
     let valid: boolean = false;
-    while(!valid){
-    let position: number = Math.floor(Math.random() * 100) + 1;
+    let position: number;
     let direction: boolean;
+    while(!valid){
+    position = Math.floor(Math.random() * 100) + 1;
     if(Math.random() < .5){
       direction = true
     }
     else{
       direction = false
     }
+
     if(this.validPlacement(position, ship.length, direction)){
-      this.placeShip(ship, position, direction)
       valid = true;
-      return
+      this.placeShip(ship, position, direction)
+      // return
+    }
+    else{
+      valid = false;
     }
   }
 }
