@@ -113,7 +113,10 @@ export class GameBoard {
     else {
    
       row = parseInt(str.slice(0, 1));
-      column = parseInt(str.slice(1, 2));
+      if(position % 10 === 0){
+        column = 9
+      }
+      else column = parseInt(str.slice(1, 2));
     }
 
     let tempRow = row
@@ -121,20 +124,21 @@ export class GameBoard {
     console.log(row, column)
     console.log(typeof this.board[tempRow][column] === 'string')
 
-    for(let i = 0; i < length; i++){
-      if(isVertical){
-        if(typeof this.board[tempRow][column] === 'string'){
-          return false
-        }
-        tempRow++
-      }
-      else if(!isVertical){
-        if(typeof this.board[row][tempColumn] === 'string'){
-          return false
-        }
-        tempColumn++
-      }
-    }
+    //this is the root of the bug but i need to implement some version of this
+    // for(let i = 0; i < length; i++){
+    //   if(isVertical){
+    //     if(!Number.isInteger(this.board[tempRow][column])){
+    //       return false
+    //     }
+    //     tempRow++
+    //   }
+    //   else if(!isVertical){
+    //     if(typeof this.board[row][tempColumn] === 'string'){
+    //       return false
+    //     }
+    //     tempColumn++
+    //   }
+    // }
     
     //starting row plus length of ship must be 10 or less to be valid
       if(isVertical && row + length - 1  < 10){
@@ -159,10 +163,14 @@ export class GameBoard {
     else{
       direction = false
     }
+
     if(this.validPlacement(position, ship.length, direction)){
       this.placeShip(ship, position, direction)
       valid = true;
       return
+    }
+    else{
+      valid = false;
     }
   }
 }

@@ -38,7 +38,7 @@ for(let i = 0; i < board.length; i++){
     for(let j = 0; j < board[i].length; j++){
         const gridItem = document.createElement('div')
         gridItem.setAttribute("position", board[i][j])
-        // gridItem.textContent = board[i][j]
+        gridItem.textContent = board[i][j]
         if(!Number.isInteger(board[i][j])){
             gridItem.classList.add('ship-here')
         }
