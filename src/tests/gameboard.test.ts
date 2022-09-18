@@ -11,8 +11,8 @@ describe('Gameboard', () => {
         game.placeShip(carrier, 10, true)
         destroyer = new Ship(4, "destroyer")
         game.placeShip(destroyer, 91, false)
-        game.recieveAttack(10)
-        game.recieveAttack(9)
+        game.recieveAttack(0, 9)
+        game.recieveAttack(0, 8)
     })
 
     test('gameboard size', () => {

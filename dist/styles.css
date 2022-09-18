@@ -72,3 +72,13 @@ h1{
 .hit{
     background-color: red;
 }
+
+.sunken1{
+    display: grid;
+
+}
+
+.sunken2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
