@@ -12,6 +12,7 @@ export default function renderGrids(playerName: string) {
   const main = document.querySelector("#main")!;
   main.classList.remove("hide");
   main.classList.add("main");
+  const content = document.querySelector('.content')!
 
   const gridContainer1 = document.querySelector(".grid1");
   const grid1 = document.querySelector(".grid-container1")!;
@@ -27,10 +28,11 @@ export default function renderGrids(playerName: string) {
 
   const whoWon = document.querySelector(".who-won");
   const restart = document.createElement("button");
+  restart.classList.add('restart')
   restart.textContent = "Restart";
   restart.addEventListener("click", function () {
-    main.innerHTML = ''
-    startGame()
+    
+   location.reload()
 });
 
   let human = new Player("human", "computer");
