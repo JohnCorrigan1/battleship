@@ -53,9 +53,23 @@ body {
   grid-template-columns: 2fr 1fr;
 }
 
-.ships{
+.ships-horizontal{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ships-vertical{
   display: flex;
   gap: 10px;
+}
+
+.rotate{
+  margin-bottom: 20px;
+}
+
+.rotated{
+  display: flex;
 }
 
 .hide {
@@ -167,10 +181,7 @@ h1 {
   margin-top: 15vh;
 }
 
-.info-container {
-  /* display: flex; */
-    /* flex-direction: column; */
-}
+
 
 .miss {
   background-color: lightgray;
