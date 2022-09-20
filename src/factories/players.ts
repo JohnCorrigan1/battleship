@@ -35,7 +35,6 @@ export class Player {
       let row = this.gameboard.getRow(newPosition);
       let col = this.gameboard.getCol(newPosition);
       if (!this.shots.includes(position)) {
-        console.log(position);
         this.shots.push(position);
         opponent.gameboard.recieveAttack(row, col);
         validShot = true;

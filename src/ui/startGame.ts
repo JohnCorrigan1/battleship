@@ -1,5 +1,6 @@
 import placeShips from "./placeShips";
 import renderGrids from "./renderGameBoards";
+import placeShip from "./placeShip";
 
 export default function startGame() {
   const info = document.querySelector(".info");
@@ -23,11 +24,11 @@ export default function startGame() {
     if (nameInput.value !== "") {
       const name = nameInput.value;
       info?.removeChild(inputContainer);
-      placeShips(name);
+      placeShip(name);
     } else {
       const name = "To lazy to enter a name";
       info?.removeChild(inputContainer);
-      placeShips(name);
+      placeShip(name);
     }
   });
 }

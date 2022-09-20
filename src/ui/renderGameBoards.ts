@@ -2,7 +2,7 @@ import { GameBoard } from "../factories/gameboard";
 import { Player } from "../factories/players";
 import { Ship } from "../factories/ship";
 import startGame from "./startGame";
-import { humanShips, computerShips, human, computer, hBoard, cBoard } from "../ui/placeShips";
+import { humanShips, computerShips, human, computer, hBoard, cBoard } from "../ui/placeShip";
 
 export default function renderGrids(playerName: string) {
   const body = document.querySelector("body");
