@@ -33,6 +33,32 @@ export default function placeShips(playerName: string){
      const grid1 = document.querySelector(".grid-container")!;
      const title1 = document.querySelector(".title-1")!;
      title1.textContent = playerName;
+
+    const ships = document.querySelector('.ships')
+     const rotateButton = document.querySelector('.rotate')
+     const carrier = document.querySelector('.carrier')
+     const destroyer = document.querySelector('.destroyer')
+     const submarine = document.querySelector('.submarine')
+     const patrol = document.querySelector('.patrol')
+
+     rotateButton?.addEventListener('click', function(){
+        if(carrier?.classList.contains('rotated')){
+            ships?.classList.remove('ships-horizontal')
+            ships?.classList.add('ships-vertical')
+            carrier.classList.remove('rotated')
+            destroyer?.classList.remove('rotated')
+            submarine?.classList.remove('rotated')
+            patrol?.classList.remove('rotated')
+        }
+        else{
+            ships?.classList.remove('ships-vertical')
+            ships?.classList.add('ships-horizontal')
+            carrier?.classList.add('rotated')
+            destroyer?.classList.add('rotated')
+            submarine?.classList.add('rotated')
+            patrol?.classList.add('rotated')
+        }
+     })
     
      
    const startButton = document.querySelector('.start-game')
