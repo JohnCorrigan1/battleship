@@ -1,45 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/ico" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <script defer src="main.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header">
-        <h1 class="title">Battleship</h1>
+      <h1 class="title">Battleship</h1>
     </div>
     <div class="info"></div>
-    <div class="content">
-        <div class="who-won"></div>
-        <div id="main" class="hide">
-            <div class="grid-1">
-                <h1 class="title-1"></h1>
-                <div class="grid-container1"></div>
-                <h2 class="sunken-title">Sunken Ships:</h2>
-                <div class="sunken1">
-                </div>
-            </div>
-            <div class="grid-2">
-                <h1 class="title-2">Computer</h1>
-                <div class="grid-container2"></div>
-                <h2 class="sunken-title">Sunken Ships:</h2> 
-                <div class="sunken2">
-                </div>
-            </div>
+    <div class="place hide">
+      <h1>Place Your Ships</h1>
+      <div class="wrapper">
+        <div class="grid-container"></div>
+        <div class="ships">
+          <div class="carrier" draggable="true">
+            <div class="ship-item ship-here"></div>
+            <div class="ship-item ship-here"></div>
+            <div class="ship-item ship-here"></div>
+            <div class="ship-item ship-here"></div>
+            <div class="ship-item ship-here"></div>
+          </div>
+          <div class="destroyer" draggable="true">
+            <div class="ship-item ship-here"></div>
+            <div class="ship-item ship-here"></div>
+            <div class="ship-item ship-here"></div>
+            <div class="ship-item ship-here"></div>
+          </div>
+          <div class="submarine" draggable="true">
+            <div class="ship-item ship-here"></div>
+            <div class="ship-item ship-here"></div>
+            <div class="ship-item ship-here"></div>
+          </div>
+          <div class="patrol" draggable="true">
+            <div class="ship-item ship-here"></div>
+            <div class="ship-item ship-here"></div>
+          </div>
         </div>
+      </div>
+      <button class="randomly-place">Random Placement</button>
+      <button class="start-game">Start</button>
+    </div>
+    <div class="content">
+      <div class="who-won"></div>
+      <div id="main" class="hide">
+        <div class="grid-1">
+          <h1 class="title-1"></h1>
+          <div class="grid-container1"></div>
+          <h2 class="sunken-title">Sunken Ships:</h2>
+          <div class="sunken1"></div>
+        </div>
+        <div class="grid-2">
+          <h1 class="title-2">Computer</h1>
+          <div class="grid-container2"></div>
+          <h2 class="sunken-title">Sunken Ships:</h2>
+          <div class="sunken2"></div>
+        </div>
+      </div>
     </div>
     <footer>
-        <p class="footer">Designed by: John Corrigan</p>
-          <a href="https://github.com/JohnCorrigan1/tic-tac-toe">
-            <img src="github-logo.png" alt="github" class="github-logo">
-        </a>  
-      </footer>
-</body>
+      <p class="footer">Designed by: John Corrigan</p>
+      <a href="https://github.com/JohnCorrigan1/battleship">
+        <img src="github-logo.png" alt="github" class="github-logo" />
+      </a>
+    </footer>
+  </body>
 </html>
