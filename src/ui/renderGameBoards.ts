@@ -2,17 +2,21 @@ import { GameBoard } from "../factories/gameboard";
 import { Player } from "../factories/players";
 import { Ship } from "../factories/ship";
 import startGame from "./startGame";
+import { humanShips, computerShips, human, computer, hBoard, cBoard } from "../ui/placeShip";
 
 export default function renderGrids(playerName: string) {
   const body = document.querySelector("body");
-  const info = document.querySelector(".info");
-  info?.classList.remove("info");
-  info?.classList.add("hide");
+  // const info = document.querySelector(".info");
+  // info?.classList.remove("info");
+  // info?.classList.add("hide");
+
+  const place = document.querySelector('.place')
+    place?.classList.add('hide')
 
   const main = document.querySelector("#main")!;
   main.classList.remove("hide");
   main.classList.add("main");
-  const content = document.querySelector('.content')!
+  const content = document.querySelector(".content")!;
 
   const gridContainer1 = document.querySelector(".grid1");
   const grid1 = document.querySelector(".grid-container1")!;
@@ -28,28 +32,27 @@ export default function renderGrids(playerName: string) {
 
   const whoWon = document.querySelector(".who-won");
   const restart = document.createElement("button");
-  restart.classList.add('restart')
+  restart.classList.add("restart");
   restart.textContent = "Restart";
   restart.addEventListener("click", function () {
-    
-   location.reload()
-});
+    location.reload();
+  });
 
-  let human = new Player("human", "computer");
-  let computer = new Player("computer", "human");
-  let hBoard = human.gameboard.board;
-  let cBoard = computer.gameboard.board;
-  let hCarrier = new Ship(5, "carrier");
-  let hDestroyer = new Ship(4, "destroyer");
-  let hSubmarine = new Ship(3, "submarine");
-  let hPatrol = new Ship(2, "patrol");
-  let cCarrier = new Ship(5, "carrier");
-  let cDestroyer = new Ship(4, "destroyer");
-  let cSubmarine = new Ship(3, "submarine");
-  let cPatrol = new Ship(2, "patrol");
+  // let human = new Player("human", "computer");
+  // let computer = new Player("computer", "human");
+  // let hBoard = human.gameboard.board;
+  // let cBoard = computer.gameboard.board;
+  // let hCarrier = new Ship(5, "carrier");
+  // let hDestroyer = new Ship(4, "destroyer");
+  // let hSubmarine = new Ship(3, "submarine");
+  // let hPatrol = new Ship(2, "patrol");
+  // let cCarrier = new Ship(5, "carrier");
+  // let cDestroyer = new Ship(4, "destroyer");
+  // let cSubmarine = new Ship(3, "submarine");
+  // let cPatrol = new Ship(2, "patrol");
 
-  const humanShips = [hCarrier, hDestroyer, hSubmarine, hPatrol];
-  const computerShips = [cCarrier, cDestroyer, cSubmarine, cPatrol];
+  // const humanShips = [hCarrier, hDestroyer, hSubmarine, hPatrol];
+  // const computerShips = [cCarrier, cDestroyer, cSubmarine, cPatrol];
 
   // allShips.forEach(ship => {
   //     computer.gameboard.randomlyPlaceShips(ship);
@@ -59,9 +62,9 @@ export default function renderGrids(playerName: string) {
   computerShips.forEach((ship) => {
     computer.gameboard.randomlyPlaceShips(ship);
   });
-  humanShips.forEach((ship) => {
-    human.gameboard.randomlyPlaceShips(ship);
-  });
+  // humanShips.forEach((ship) => {
+  //   human.gameboard.randomlyPlaceShips(ship);
+  // });
 
   let count: any = 0;
   for (let i = 0; i < hBoard.length; i++) {
@@ -126,6 +129,7 @@ export default function renderGrids(playerName: string) {
         let row: number = human.gameboard.getRow(newPosition);
         let col: number = human.gameboard.getCol(newPosition);
         if (!Number.isInteger(human.gameboard.board[row][col])) {
+          item?.classList.remove('ship-here')
           item?.classList.add("hit");
           let isSunk1: boolean = false;
           human.gameboard.recieveAttack(i, j);

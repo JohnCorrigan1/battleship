@@ -45,7 +45,7 @@ describe("Ship", () => {
   })
 
   test("game ends", () => {
-    expect(game.isOver()).toBe(true)
+    expect(game.isOver()).toBe(false)
   })
 
   test("invalid placement", () => {
