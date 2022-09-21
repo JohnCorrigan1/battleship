@@ -6,6 +6,7 @@ import { humanShips, computerShips, human, computer, hBoard, cBoard } from "../u
 
 export default function renderGrids(playerName: string) {
   const body = document.querySelector("body");
+  console.log(hBoard)
   // const info = document.querySelector(".info");
   // info?.classList.remove("info");
   // info?.classList.add("hide");

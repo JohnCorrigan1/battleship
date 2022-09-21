@@ -1,4 +1,3 @@
-import placeShips from "./placeShips";
 import renderGrids from "./renderGameBoards";
 import placeShip from "./placeShip";
 
