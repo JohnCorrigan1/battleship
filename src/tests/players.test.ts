@@ -32,7 +32,7 @@ describe("Player", () => {
   })
 
   test("game ends", () => {
-    expect(me.gameboard.isOver()).toBe(true)
+    expect(me.gameboard.isOver()).toBe(false)
   })
 
   test("computer random attack", () => {

@@ -36,11 +36,11 @@ describe('Gameboard', () => {
     })
 
     test('attack hit', () => {
-        expect(game.hits.includes(10)).toBe(true)
+        expect(game.hits.includes(9)).toBe(true)
     })
 
     test('attack miss', () => {
-        expect(game.misses.includes(9)).toBe(true)
+        expect(game.misses.includes(8)).toBe(true)
     })
     
 })

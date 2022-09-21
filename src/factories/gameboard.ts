@@ -72,29 +72,29 @@ export class GameBoard {
         if (ship.name === this.board[row][column]) {
           ship.hit(position);
           ship.isSunk();
-          if(ship.isSunk()){
-            this.sunkShips.push(ship)
+          if (ship.isSunk()) {
+            this.sunkShips.push(ship);
           }
-          return
+          return;
         }
       });
     } else {
       this.misses.push(position);
-      return
+      return;
     }
   }
 
   isOver() {
-   if(this.sunkShips.length === 4){
-    return true
-   }
-   return false
+    if (this.sunkShips.length === 4) {
+      return true;
+    }
+    return false;
   }
 
   validPlacement(position: number, length: number, isVertical: boolean) {
-    let newPosition = this.convertPosition(position)
-    let row = this.getRow(newPosition)
-    let column = this.getCol(newPosition)
+    let newPosition = this.convertPosition(position);
+    let row = this.getRow(newPosition);
+    let column = this.getCol(newPosition);
 
     if (isVertical && row + length > 10) {
       return false;
@@ -154,12 +154,10 @@ export class GameBoard {
     } else if (position === 100) {
       row = 9;
       column = 9;
-    } 
-    else if(position % 10 === 0){
-      row = parseInt(str.slice(0,1))
-      column = 9
-    }
-    else {
+    } else if (position % 10 === 0) {
+      row = parseInt(str.slice(0, 1));
+      column = 9;
+    } else {
       row = parseInt(str.slice(0, 1));
       column = parseInt(str.slice(1, 2)) - 1;
     }
