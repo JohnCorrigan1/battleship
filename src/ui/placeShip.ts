@@ -41,8 +41,6 @@ export default function placeShip(playerName: string) {
   
 
   const grid = document.querySelector(".grid-container")!;
-  // const title1 = document.querySelector(".title-1")!;
-  // title1.textContent = playerName;
 
   const ships = document.querySelector(".ships");
   const rotateButton = document.querySelector(".rotate");
@@ -75,27 +73,12 @@ if(calls === 1) {
 
   const startButton = document.querySelector(".start-game");
   startButton?.addEventListener("click", function () {
-    // grid1.classList.add('hide')
-    // place.innerHTML = "";
     place.innerHTML = ''
     renderGrids(playerName);
   });
 }
   checkBoard()
-  // let count: any = 0;
-  // grid.innerHTML = ''
-  // for (let i = 0; i < hBoard.length; i++) {
-  //   for (let j = 0; j < hBoard[i].length; j++) {
-  //     count++;
-  //     const gridItem = document.createElement("div");
-  //     gridItem.setAttribute("data-hposition", count);
-  //     if (!Number.isInteger(hBoard[i][j])) {
-  //       gridItem.classList.add("ship-here");
-  //     }
-  //     gridItem.classList.add("grid-item");
-  //     grid?.appendChild(gridItem);
-  //   }
-  // }
+
 
   const randomlyPlace = <HTMLButtonElement>(
     document.querySelector(".randomly-place")
@@ -109,24 +92,6 @@ if(calls === 1) {
     checkBoard();
   });
 
-  // function checkBoard() {
-  //   grid.innerHTML = ''
-  //   let count: any = 0;
-  //   for (let i = 0; i < hBoard.length; i++) {
-  //     for (let j = 0; j < hBoard[i].length; j++) {
-  //       count++;
-  //       const gridItem = document.createElement("div");
-  //       gridItem.setAttribute("data-hposition", count);
-  //       // gridItem.textContent = board[i][j]
-  //       if (!Number.isInteger(hBoard[i][j])) {
-  //         gridItem.classList.add("ship-here");
-  //       }
-  //       gridItem.classList.add("grid-item");
-  //       grid?.appendChild(gridItem);
-  //     }
-  //   }
-  //   // events();
-  // }
 
 function checkBoard(){
    let count: any = 0;
@@ -144,10 +109,9 @@ function checkBoard(){
     }
   }
 }
-// }
+
   events();
 
-  let counter: number = 0;
   function events() {
     const draggables = document.querySelectorAll(".draggable")!;
 
@@ -157,33 +121,12 @@ function checkBoard(){
         });
         
         draggable.addEventListener("dragend", (ev) => {
-            // console.log(ev.target)
             const shipElement: any = ev.target
-            ev
-            // console.log(position)
             const currentPos = parseInt(position.dataset.hposition)
-            // console.log(currentPos)
-            // console.log(ship.id)
             const shipName = shipElement.id;
-
-            const current = [shipName, currentPos]
-
-            manuallyPlacedShips.push(current)
-            // placeShipDragged(currentPos, shipName)
-            // console.log(hBoard)
-            console.log(manuallyPlacedShips)
             
-            placeShipDragged(manuallyPlacedShips, counter)
-            // counter++
-            // checkPlaced(manuallyPlacedShips)
-            // grid1.innerHTML = ''
-            // checkBoard()
-
-            // const item = document.querySelector(`div[hposition="${currentPos}"]`)
-            // console.log(item)
-            counter++
+            placeShipDragged(shipName, currentPos)
             placeShip(playerName)
-            // console.log(hBoard)
         })
     });
     
@@ -191,72 +134,50 @@ function checkBoard(){
     gridItem.forEach(item => {
         item.addEventListener("dragover", (e) => {
            position = e.target
-            // console.log(position)
         })
     })
   }
 
-  function isValid(position: number, name: string){
-    let direction = false;
-    if(carrier.classList.contains("rotated")){
-      direction = true;
-    }
-    if(name === "carrier"){
-      human.gameboard.validPlacement(position, 5, direction)
-    }
-  }
+  // function isValid(position: number, name: string){
+  //   let direction = false;
+  //   if(carrier.classList.contains("rotated")){
+  //     direction = true;
+  //   }
+  //   if(name === "carrier"){
+  //     human.gameboard.validPlacement(position, 5, direction)
+  //   }
+  // }
 
-  function placeShipDragged(arr: any, count: number) {
-    if (arr[count][0] === "carrier") {
+  function placeShipDragged(shipName: string, currentPos: number) {
+    if (shipName === "carrier") {
       if (carrier.classList.contains("rotated")) {
-        human.gameboard.placeShip(hCarrier, arr[count][1], false);
+        human.gameboard.placeShip(hCarrier, currentPos, false);
       } else {
-        human.gameboard.placeShip(hCarrier, arr[count][1], true);
+        human.gameboard.placeShip(hCarrier, currentPos, true);
       }
     }
-    if (arr[count][0] === "destroyer") {
+    if (shipName === "destroyer") {
       if (carrier.classList.contains("rotated")) {
-        human.gameboard.placeShip(hDestroyer, arr[count][1], false);
+        human.gameboard.placeShip(hDestroyer, currentPos, false);
       } else {
-        human.gameboard.placeShip(hDestroyer, arr[count][1], true);
+        human.gameboard.placeShip(hDestroyer, currentPos, true);
       }
     }
-    if (arr[count][0] === "submarine") {
+    if (shipName === "submarine") {
       if (carrier.classList.contains("rotated")) {
-        human.gameboard.placeShip(hSubmarine, arr[count][1], false);
+        human.gameboard.placeShip(hSubmarine, currentPos, false);
       } else {
-        human.gameboard.placeShip(hSubmarine, arr[count][1], true);
+        human.gameboard.placeShip(hSubmarine, currentPos, true);
       }
     }
-    if (arr[count][0] === "patrol") {
+    if (shipName === "patrol") {
       if (carrier.classList.contains("rotated")) {
-        human.gameboard.placeShip(hPatrol, arr[count][1], false);
+        human.gameboard.placeShip(hPatrol, currentPos, false);
       } else {
-        human.gameboard.placeShip(hPatrol, arr[count][1], true);
+        human.gameboard.placeShip(hPatrol, currentPos, true);
       }
     }
-    // events()
-    // grid1.innerHTML = ''
-    // checkBoard();
-    
-    // placeShip(playerName)
 }
-
-// function checkPlaced(arr: any){
-//     if(arr.length === 4){
-//         arr.forEach((item: any) => {
-//             placeShipDragged(item[1], item[0])
-//         })
-//         console.log(hBoard)
-//         grid1.innerHTML = "";
-//         checkBoard()
-//     }
-//     else{
-//         return
-//     }
-//   }
-
-
 
 }
 
