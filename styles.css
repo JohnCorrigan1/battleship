@@ -55,17 +55,17 @@ body {
 }
 
 .grid-item-p:hover{
-  
+
 }
 
 .wrapper{
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
-/* 
+
 .dragging{
   opacity: 0.01;
-} */
+}
 
 .ships-horizontal{
   display: flex;
