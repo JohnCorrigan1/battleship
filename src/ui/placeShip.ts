@@ -82,10 +82,13 @@ if(calls === 1) {
   randomlyPlace?.addEventListener("click", function () {
     humanShips.forEach((ship) => {
       human.gameboard.randomlyPlaceShips(ship);
+      placedShips.push("ship")
     });
     randomlyPlace.disabled = true;
     grid.innerHTML = "";
     checkBoard();
+    ships?.classList.add("hide")
+    rotateButton?.classList.add("hide")
   });
 
 
