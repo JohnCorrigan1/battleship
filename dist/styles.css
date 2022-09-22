@@ -170,6 +170,8 @@ html {
     border: 2px solid black;
     width: 2em;
     height: 2em;
+    justify-content: center;
+    align-items: center;
   }
   
   .ship-item{
@@ -198,7 +200,9 @@ html {
   
   
   .miss {
-    background-color: lightgray;
+    /* background-color: lightgray; */
+    justify-content: center;
+    align-items: center;
   }
   
   .ai-grid:hover {
