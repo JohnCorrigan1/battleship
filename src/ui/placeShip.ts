@@ -45,9 +45,9 @@ export default function placeShip(playerName: string) {
   const ships = document.querySelector(".ships");
   const rotateButton = document.querySelector(".rotate");
   const carrier = document.querySelector(".carrier")!;
-  const destroyer = document.querySelector(".destroyer");
-  const submarine = document.querySelector(".submarine");
-  const patrol = document.querySelector(".patrol");
+  const destroyer = document.querySelector(".destroyer")!;
+  const submarine = document.querySelector(".submarine")!;
+  const patrol = document.querySelector(".patrol")!;
 
 
 if(calls === 1) {
@@ -153,35 +153,81 @@ function checkBoard(){
       if (carrier.classList.contains("rotated")) {
         if(human.gameboard.validPlacement(currentPos, 5, false)){
         human.gameboard.placeShip(hCarrier, currentPos, false);
+        ships?.removeChild(carrier)
         }
         else{
           carrier.classList.remove('dragging')
           return
         }
       } else {
+        if(human.gameboard.validPlacement(currentPos, 5, true)){
         human.gameboard.placeShip(hCarrier, currentPos, true);
+        ships?.removeChild(carrier)
       }
+      else{
+        carrier.classList.remove('dragging')
+      }
+    }
     }
     if (shipName === "destroyer") {
-      if (carrier.classList.contains("rotated")) {
+      if (destroyer.classList.contains("rotated")) {
+        if(human.gameboard.validPlacement(currentPos, 4, false)){
         human.gameboard.placeShip(hDestroyer, currentPos, false);
+        ships?.removeChild(destroyer)
+        }
+        else{
+          destroyer.classList.remove('dragging')
+          return
+        }
       } else {
+        if(human.gameboard.validPlacement(currentPos, 4, true)){
         human.gameboard.placeShip(hDestroyer, currentPos, true);
+        ships?.removeChild(destroyer)
       }
+      else{
+        destroyer.classList.remove('dragging')
+      }
+    }
     }
     if (shipName === "submarine") {
-      if (carrier.classList.contains("rotated")) {
+      if (submarine.classList.contains("rotated")) {
+        if(human.gameboard.validPlacement(currentPos, 3, false)){
         human.gameboard.placeShip(hSubmarine, currentPos, false);
+        ships?.removeChild(submarine)
+        }
+        else{
+          submarine.classList.remove('dragging')
+          return
+        }
       } else {
+        if(human.gameboard.validPlacement(currentPos, 3, true)){
         human.gameboard.placeShip(hSubmarine, currentPos, true);
+        ships?.removeChild(submarine)
+      }
+      else{
+        submarine.classList.remove('dragging')
       }
     }
+    }
     if (shipName === "patrol") {
-      if (carrier.classList.contains("rotated")) {
+      if (patrol.classList.contains("rotated")) {
+        if(human.gameboard.validPlacement(currentPos, 2, false)){
         human.gameboard.placeShip(hPatrol, currentPos, false);
+        ships?.removeChild(patrol)
+        }
+        else{
+          patrol.classList.remove('dragging')
+          return
+        }
       } else {
+        if(human.gameboard.validPlacement(currentPos, 2, true)){
         human.gameboard.placeShip(hPatrol, currentPos, true);
+        ships?.removeChild(patrol)
       }
+      else{
+        patrol.classList.remove('dragging')
+      }
+    }
     }
 }
 
