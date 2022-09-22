@@ -1,4 +1,3 @@
-import renderGrids from "./renderGameBoards";
 import placeShip from "./placeShip";
 
 export default function startGame() {
@@ -7,6 +6,7 @@ export default function startGame() {
   const inputContainer = document.createElement("div");
   inputContainer.classList.add("input-container");
   const nameLabel = document.createElement("label");
+  nameLabel.classList.add("name-label")
   nameLabel.textContent = "Enter Name:";
   const nameInput = document.createElement("input");
   nameInput.classList.add("name-input");
@@ -18,6 +18,7 @@ export default function startGame() {
   inputContainer.appendChild(nameInput);
   inputContainer.appendChild(startButton);
   info?.appendChild(inputContainer);
+  // info?.appendChild(startButton);
 
   startButton.addEventListener("click", function () {
     if (nameInput.value !== "") {

@@ -20,16 +20,12 @@ const computerShips = [cCarrier, cDestroyer, cSubmarine, cPatrol];
 
 let calls: number = 0;
 
+const placedShips: string[] = [];
+
 
 export default function placeShip(playerName: string) {
 
   calls++
-  
-  const manuallyPlacedShips: any[][] = []
-  if(manuallyPlacedShips.length === 4){
-    return
-  }
-  
   let position: any;
 
   const info = document.querySelector(".info");
@@ -38,8 +34,6 @@ export default function placeShip(playerName: string) {
 
   const place = document.querySelector(".place")!;
   place?.classList.remove("hide");
-  
-
   const grid = document.querySelector(".grid-container")!;
 
   const ships = document.querySelector(".ships");
@@ -73,8 +67,10 @@ if(calls === 1) {
 
   const startButton = document.querySelector(".start-game");
   startButton?.addEventListener("click", function () {
+    if(placedShips.length === 4){
     place.innerHTML = ''
     renderGrids(playerName);
+    }
   });
 }
   checkBoard()
@@ -138,22 +134,16 @@ function checkBoard(){
     })
   }
 
-  // function isValid(position: number, name: string){
-  //   let direction = false;
-  //   if(carrier.classList.contains("rotated")){
-  //     direction = true;
-  //   }
-  //   if(name === "carrier"){
-  //     human.gameboard.validPlacement(position, 5, direction)
-  //   }
-  // }
-
   function placeShipDragged(shipName: string, currentPos: number) {
+    if(randomlyPlace.disabled === false){
+      randomlyPlace.disabled = true
+    }
     if (shipName === "carrier") {
       if (carrier.classList.contains("rotated")) {
         if(human.gameboard.validPlacement(currentPos, 5, false)){
         human.gameboard.placeShip(hCarrier, currentPos, false);
         ships?.removeChild(carrier)
+        placedShips.push(shipName)
         }
         else{
           carrier.classList.remove('dragging')
@@ -163,6 +153,7 @@ function checkBoard(){
         if(human.gameboard.validPlacement(currentPos, 5, true)){
         human.gameboard.placeShip(hCarrier, currentPos, true);
         ships?.removeChild(carrier)
+        placedShips.push(shipName)
       }
       else{
         carrier.classList.remove('dragging')
@@ -174,6 +165,7 @@ function checkBoard(){
         if(human.gameboard.validPlacement(currentPos, 4, false)){
         human.gameboard.placeShip(hDestroyer, currentPos, false);
         ships?.removeChild(destroyer)
+        placedShips.push(shipName)
         }
         else{
           destroyer.classList.remove('dragging')
@@ -183,6 +175,7 @@ function checkBoard(){
         if(human.gameboard.validPlacement(currentPos, 4, true)){
         human.gameboard.placeShip(hDestroyer, currentPos, true);
         ships?.removeChild(destroyer)
+        placedShips.push(shipName)
       }
       else{
         destroyer.classList.remove('dragging')
@@ -194,6 +187,7 @@ function checkBoard(){
         if(human.gameboard.validPlacement(currentPos, 3, false)){
         human.gameboard.placeShip(hSubmarine, currentPos, false);
         ships?.removeChild(submarine)
+        placedShips.push(shipName)
         }
         else{
           submarine.classList.remove('dragging')
@@ -203,6 +197,7 @@ function checkBoard(){
         if(human.gameboard.validPlacement(currentPos, 3, true)){
         human.gameboard.placeShip(hSubmarine, currentPos, true);
         ships?.removeChild(submarine)
+        placedShips.push(shipName)
       }
       else{
         submarine.classList.remove('dragging')
@@ -214,6 +209,7 @@ function checkBoard(){
         if(human.gameboard.validPlacement(currentPos, 2, false)){
         human.gameboard.placeShip(hPatrol, currentPos, false);
         ships?.removeChild(patrol)
+        placedShips.push(shipName)
         }
         else{
           patrol.classList.remove('dragging')
@@ -223,6 +219,7 @@ function checkBoard(){
         if(human.gameboard.validPlacement(currentPos, 2, true)){
         human.gameboard.placeShip(hPatrol, currentPos, true);
         ships?.removeChild(patrol)
+        placedShips.push(shipName)
       }
       else{
         patrol.classList.remove('dragging')

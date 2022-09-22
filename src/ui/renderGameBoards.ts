@@ -1,31 +1,18 @@
-import { GameBoard } from "../factories/gameboard";
-import { Player } from "../factories/players";
-import { Ship } from "../factories/ship";
-import startGame from "./startGame";
 import { humanShips, computerShips, human, computer, hBoard, cBoard } from "../ui/placeShip";
 
 export default function renderGrids(playerName: string) {
-  const body = document.querySelector("body");
-  console.log(hBoard)
-  // const info = document.querySelector(".info");
-  // info?.classList.remove("info");
-  // info?.classList.add("hide");
-
   const place = document.querySelector('.place')
     place?.classList.add('hide')
 
   const main = document.querySelector("#main")!;
   main.classList.remove("hide");
   main.classList.add("main");
-  const content = document.querySelector(".content")!;
 
-  const gridContainer1 = document.querySelector(".grid1");
   const grid1 = document.querySelector(".grid-container1")!;
   const title1 = document.querySelector(".title-1")!;
   title1.textContent = playerName;
   const sunken1 = document.querySelector(".sunken1");
 
-  const gridContainer2 = document.querySelector(".grid2");
   const grid2 = document.querySelector(".grid-container2")!;
   const title2 = document.querySelector(".title-2")!;
   title2.textContent = "Computer";
@@ -39,33 +26,10 @@ export default function renderGrids(playerName: string) {
     location.reload();
   });
 
-  // let human = new Player("human", "computer");
-  // let computer = new Player("computer", "human");
-  // let hBoard = human.gameboard.board;
-  // let cBoard = computer.gameboard.board;
-  // let hCarrier = new Ship(5, "carrier");
-  // let hDestroyer = new Ship(4, "destroyer");
-  // let hSubmarine = new Ship(3, "submarine");
-  // let hPatrol = new Ship(2, "patrol");
-  // let cCarrier = new Ship(5, "carrier");
-  // let cDestroyer = new Ship(4, "destroyer");
-  // let cSubmarine = new Ship(3, "submarine");
-  // let cPatrol = new Ship(2, "patrol");
-
-  // const humanShips = [hCarrier, hDestroyer, hSubmarine, hPatrol];
-  // const computerShips = [cCarrier, cDestroyer, cSubmarine, cPatrol];
-
-  // allShips.forEach(ship => {
-  //     computer.gameboard.randomlyPlaceShips(ship);
-  //     human.gameboard.randomlyPlaceShips(ship);
-  // })
 
   computerShips.forEach((ship) => {
     computer.gameboard.randomlyPlaceShips(ship);
   });
-  // humanShips.forEach((ship) => {
-  //   human.gameboard.randomlyPlaceShips(ship);
-  // });
 
   let count: any = 0;
   for (let i = 0; i < hBoard.length; i++) {
@@ -121,10 +85,11 @@ export default function renderGrids(playerName: string) {
           }
         } else {
           gridItem.classList.add("miss");
+          gridItem.textContent = "X"
         }
         let position: any;
         position = computer.randomAttack(human);
-        const item = document.querySelector(`[hposition="${position}"]`);
+        const item = document.querySelector(`[hposition="${position}"]`)!;
         let temp: number = position;
         let newPosition: string = human.gameboard.convertPosition(temp);
         let row: number = human.gameboard.getRow(newPosition);
@@ -153,6 +118,7 @@ export default function renderGrids(playerName: string) {
           }
         } else {
           item?.classList.add("miss");
+          item.textContent = "X"
         }
       });
       grid2?.appendChild(gridItem);
